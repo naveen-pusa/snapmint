@@ -20,7 +20,7 @@ function Carousel() {
       <div class="carousel-caption d-none d-md-block">
       </div>
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item">   
       <img src="https://www.merisisvp.com/hs-fs/hubfs/Untitled%20design%20(1).png?width=2000&height=1125&name=Untitled%20design%20(1).png" className="d-block w-100"  style={{ height: "500px", objectFit: "cover" }}alt="Slide 1"/>
       <div class="carousel-caption d-none d-md-block">
        

@@ -7,7 +7,7 @@ const Footer = () => {
   // COMMON STYLE
 
   const linkStyle = (name) => ({
-    color: hovered === name ? "#2e8ca1" : "#3f4f5f",
+  color: hovered === name ? "#2e8ca1" : "#3f4f5f",
     cursor: "pointer",
     transition: "0.3s",
     fontSize: "18px",
@@ -18,7 +18,7 @@ const Footer = () => {
     <>
       <div
         className="container-fluid"
-        style={{
+          style={{
           backgroundColor: "#f1f1f1",
           padding: "40px 30px",
           marginTop: "40px",
