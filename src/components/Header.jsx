@@ -1,6 +1,6 @@
 import React from "react";
 
-import {
+import { 
     FaSearch,
     FaRegUserCircle,
     FaBars,
@@ -114,30 +114,31 @@ const Header = () => {
                             style={{fontSize: "26px",cursor: "pointer", color: "#004851",}}
                         />
 
-                        <span style={{ fontWeight: "500" }}>Mobiles</span>
+                        <span style={{ fontWeight: "500" }}>Beauty</span>
 
-                        <span style={{ fontWeight: "500" }}>Electronics</span>
+                        <span style={{ fontWeight: "500" }}>Groceries</span>
 
                         <span style={{ fontWeight: "500" }}>
-                            TV, AC & Appliances
+                              Mens-shirts
                         </span>
 
                         <span style={{ fontWeight: "500" }}>
-                            Kitchen & Home
+                        Smartphones
                         </span>
 
                         <span style={{ fontWeight: "500" }}>
-                            Health & Wellness
+                             womens-jewellery                     
                         </span>
 
                         <span style={{ fontWeight: "500" }}>Fashion</span>
 
                         <span style={{ fontWeight: "500" }}>
-                            Baby & Kids
+                             Skin-care
+
                         </span>
 
                         <span style={{ fontWeight: "500" }}>
-                            Sports & Fitness
+                            Sports-accessories
                         </span>
 
                     </div>

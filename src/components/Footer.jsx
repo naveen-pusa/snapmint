@@ -5,7 +5,7 @@ const Footer = () => {
   const [hovered, setHovered] = useState("");
 
   // COMMON STYLE
-
+ 
   const linkStyle = (name) => ({
   color: hovered === name ? "#2e8ca1" : "#3f4f5f",
     cursor: "pointer",
