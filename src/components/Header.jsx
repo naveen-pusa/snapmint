@@ -10,6 +10,9 @@ import { HiOutlineBriefcase } from "react-icons/hi";
 import { PiCubeLight } from "react-icons/pi";
 
 const Header = () => {
+ 
+    const 
+
     return (
         <>
             {/* TOP HEADER */}
