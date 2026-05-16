@@ -11,7 +11,7 @@ import { PiCubeLight } from "react-icons/pi";
 
 const Header = () => {
  
-    const 
+    
 
     return (
         <>
@@ -149,7 +149,7 @@ const Header = () => {
                 </div>
             </div>
         </>
-    );
-};
+    )
+}
 
 export default Header;
