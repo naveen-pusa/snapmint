@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Footer = () => {
 
-  const [hovered, setHovered] = useState("");
+         const [hovered, setHovered] = useState("");
 
   // COMMON STYLE
  
@@ -21,7 +21,7 @@ const Footer = () => {
           style={{
           backgroundColor: "#f1f1f1",
           padding: "40px 30px",
-          marginTop: "40px",
+              marginTop: "40px",
         }}
       >
 

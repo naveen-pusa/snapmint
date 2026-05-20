@@ -136,7 +136,7 @@ const Header = () => {
                         <span style={{ fontWeight: "500" }}>Fashion</span>
 
                         <span style={{ fontWeight: "500" }}>
-                             Skin-care
+                                 Skin-care
 
                         </span>
 
