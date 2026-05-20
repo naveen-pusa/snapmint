@@ -347,7 +347,7 @@ const Footer = () => {
                   marginBottom: "30px",
                 }}
               >
-                Download Snapmint Today
+            Download Snapmint Today
               </h2>
 
               <div className="d-flex gap-3 flex-wrap">

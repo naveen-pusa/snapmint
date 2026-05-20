@@ -4,7 +4,7 @@ import {
     FaSearch,
     FaRegUserCircle,
     FaBars,
-} from "react-icons/fa";
+}   from "react-icons/fa";
 
 import { HiOutlineBriefcase } from "react-icons/hi";
 import { PiCubeLight } from "react-icons/pi";
@@ -129,7 +129,7 @@ const Header = () => {
                         Smartphones
                         </span>
 
-                        <span style={{ fontWeight: "500" }}>
+                            <span style={{ fontWeight: "500" }}>
                              womens-jewellery                     
                         </span>
 
