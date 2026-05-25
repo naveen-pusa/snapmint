@@ -19,7 +19,7 @@ const Header = () => {
 
             <div
                 className="container-fluid"
-                style={{ backgroundColor: "#eef8fa", padding: "15px 30px",}} >
+                style={{   backgroundColor: "#eef8fa", padding: "15px 30px",}} >
                 <div className="row align-items-center">
 
                     {/* LOGO */}
