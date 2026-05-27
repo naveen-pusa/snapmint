@@ -11,17 +11,17 @@ return (
   </div>
   <div className="carousel-inner">
     <div className="carousel-item active">
-      <img src="https://elev8vp.com/wp-content/uploads/2025/07/snapmint-logo.webp"className="d-block w-100" style={{ height: "400px", objectFit: "cover" }}alt="Slide 1"/>
+      <img src="https://elev8vp.com/wp-content/uploads/2025/07/snapmint-logo.webp"className="d-block w-100" style={{ height: "300px", objectFit: "cover" }}alt="Slide 1"/>
       <div className="carousel-caption d-none d-md-block">
       </div>
     </div>
     <div className="carousel-item">
-<img src="https://cdn.aptoide.com/imgs/4/4/d/44dc60773f098a3c0c18442750b36deb_fgraphic.png" className="d-block w-100"style={{ height: "400px", objectFit: "cover" }} alt="Slide 1"/>
+<img src="https://cdn.aptoide.com/imgs/4/4/d/44dc60773f098a3c0c18442750b36deb_fgraphic.png" className="d-block w-100"style={{ height: "300px", objectFit: "cover" }} alt="Slide 1"/>
       <div className="carousel-caption d-none d-md-block">
       </div>
     </div>
     <div className="carousel-item">   
-      <img src="https://www.merisisvp.com/hs-fs/hubfs/Untitled%20design%20(1).png?width=2000&height=1125&name=Untitled%20design%20(1).png" className="d-block w-100"  style={{ height: "400px", objectFit: "cover" }}alt="Slide 1"/>
+      <img src="https://www.merisisvp.com/hs-fs/hubfs/Untitled%20design%20(1).png?width=2000&height=1125&name=Untitled%20design%20(1).png" className="d-block w-100"  style={{ height: "300px", objectFit: "cover" }}alt="Slide 1"/>
       <div className="carousel-caption d-none d-md-block">
        
       </div>
