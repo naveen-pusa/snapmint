@@ -155,7 +155,7 @@ function Products({ onSelectProduct, onAddToCart, search, category }) {
               </li>
 
               {/* Previous button */}
-              <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+              <li   className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
                 <button className="page-link" onClick={() => handlePageChange(currentPage - 1)}>
                   ‹
                 </button>
