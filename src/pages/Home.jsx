@@ -5,69 +5,98 @@ import Carousel from '../components/Carousel'
 import Footer from '../components/Footer'
 import Products from './Products'
 // import SingleProduct from './SingleProduct'
-// import Cart from './Cart'
-
 
 function Home() {
 
-  // ── Page State ──
   const [page, setPage] = useState('home')
   const [selectedProduct, setSelectedProduct] = useState(null)
 
-  // ── Search & Category — shared between Header and Products ──
+  // Search & Category
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
   const [categoryList, setCategoryList] = useState([])
 
-  // ── Cart State ──
-  const [cartItems, setCartItems] = useState([])
+  // ── CART STATE ──
+  // Initialize from localStorage so cart survives page refresh
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem('snapmint_cart')
+      return saved ? JSON.parse(saved) : []
+    } catch {
+      return []
+    }
+  })
 
-  // Fetch category list once on mount — passed to Header dropdown
+  // ── SAVE TO LOCALSTORAGE every time cartItems changes ──
+  // This is why cart persists on refresh
+  useEffect(() => {
+    localStorage.setItem('snapmint_cart', JSON.stringify(cartItems))
+  }, [cartItems])
+
+  // Fetch category list once on mount
   useEffect(() => {
     axios.get('https://dummyjson.com/products/categories').then(({ data }) => {
       setCategoryList(data)
     })
   }, [])
 
-  // ── Cart Functions ──
+  // ── ADD TO CART ──
+  // FIXED: uses functional update with strict id check
+  // Same product → qty+1 only. New product → add with qty:1
   const handleAddToCart = (product) => {
     setCartItems(prev => {
-      const exists = prev.find(item => item.id === product.id)
-      if (exists) {
-        return prev.map(item =>
-          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
-        )
+      // Check if this exact product id already exists
+      const existingIndex = prev.findIndex(item => item.id === product.id)
+
+      if (existingIndex !== -1) {
+        // Product already in cart → only increase quantity, do NOT add new item
+        const updated = [...prev]
+        updated[existingIndex] = {
+          ...updated[existingIndex],
+          qty: updated[existingIndex].qty + 1
+        }
+        return updated
       }
+
+      // Product not in cart → add as new item with qty: 1
       return [...prev, { ...product, qty: 1 }]
     })
   }
 
+  // ── UPDATE QUANTITY ──
   const handleUpdateQuantity = (id, newQty) => {
-    if (newQty < 1) { handleRemoveItem(id); return }
+    if (newQty < 1) {
+      handleRemoveItem(id)
+      return
+    }
     setCartItems(prev =>
       prev.map(item => item.id === id ? { ...item, qty: newQty } : item)
     )
   }
 
+  // ── REMOVE SINGLE ITEM ──
   const handleRemoveItem = (id) => {
     setCartItems(prev => prev.filter(item => item.id !== id))
   }
 
-  const handleClearCart = () => setCartItems([])
-
-  const cartCount = cartItems.reduce((sum, item) => sum + item.qty, 0)
+  // ── CLEAR ALL — also clears localStorage ──
+  const handleClearCart = () => {
+    setCartItems([])
+    localStorage.removeItem('snapmint_cart')
+  }
 
   return (
     <>
-      {/* Header — sets search and category state */}
       <Header
         search={search}
         setSearch={setSearch}
         category={category}
         setCategory={setCategory}
         categoryList={categoryList}
-        cartCount={cartCount}
-        onCartClick={() => setPage('cart')}
+        cartItems={cartItems}
+        onUpdateQuantity={handleUpdateQuantity}
+        onRemoveItem={handleRemoveItem}
+        onClearCart={handleClearCart}
         onLogoClick={() => {
           setPage('home')
           setSearch('')
@@ -77,10 +106,7 @@ function Home() {
 
       {page === 'home' && (
         <>
-          {/* Only show carousel when not searching or filtering */}
           {!search && !category && <Carousel />}
-
-          {/* Products reads search and category as props */}
           <Products
             search={search}
             category={category}
@@ -98,16 +124,6 @@ function Home() {
           product={selectedProduct}
           onAddToCart={handleAddToCart}
           onBack={() => setPage('home')}
-        />
-      )}
-
-      {page === 'cart' && (
-        <Cart
-          cartItems={cartItems}
-          onBack={() => setPage('home')}
-          onUpdateQuantity={handleUpdateQuantity}
-          onRemoveItem={handleRemoveItem}
-          onClearCart={handleClearCart}
         />
       )}
 
