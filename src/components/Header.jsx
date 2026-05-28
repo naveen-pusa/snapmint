@@ -1,7 +1,8 @@
-import React from "react";
-import { FaSearch, FaRegUserCircle, FaBars } from "react-icons/fa";
+import React, { useState, useRef, useEffect } from "react";
+import { FaSearch, FaRegUserCircle, FaBars, FaShoppingCart } from "react-icons/fa";
 import { HiOutlineBriefcase } from "react-icons/hi";
 import { PiCubeLight } from "react-icons/pi";
+import Cart from "../pages/Cart";
 
 const Header = ({
   search,
@@ -9,13 +10,34 @@ const Header = ({
   category,
   setCategory,
   categoryList,
-  cartCount,
-  onCartClick,
+  cartItems,
+  onUpdateQuantity,
+  onRemoveItem,
+  onClearCart,
   onLogoClick,
 }) => {
 
-  // ← FIX: if categoryList is undefined on first render, use [] so .map never crashes
+  const safeCartItems = cartItems || []
   const safeCategoryList = categoryList || []
+
+  const [cartOpen, setCartOpen] = useState(false)
+  const cartRef = useRef(null)
+
+  // ── FIX: count unique products, not total qty ──
+  // If you add same product 5 times → badge shows 1 (1 unique product)
+  // If you add 3 different products → badge shows 3
+  const cartCount = safeCartItems.length  // ← FIXED: was reduce(sum + qty) before
+
+  // Close cart dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (cartRef.current && !cartRef.current.contains(e.target)) {
+        setCartOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   return (
     <>
@@ -27,16 +49,10 @@ const Header = ({
         <div className="row align-items-center g-3">
 
           {/* LOGO */}
-          <div
-            className="col-lg-2"
-            style={{ cursor: "pointer" }}
-            onClick={onLogoClick}
-          >
-            <h1
-              style={{ fontSize: "42px", fontWeight: "700", color: "#004851", margin: "0" }}
-            >
-              Pusa
-              <span style={{ color: "#63c7cf", fontWeight: "500" }}>VKR</span>
+          <div className="col-lg-2" style={{ cursor: "pointer" }} onClick={onLogoClick}>
+            <h1 style={{ fontSize: "42px", fontWeight: "700", color: "#004851", margin: "0" }}>
+              snap
+              <span style={{ color: "#63c7cf", fontWeight: "500" }}>mint</span>
             </h1>
           </div>
 
@@ -75,7 +91,7 @@ const Header = ({
               }}
             >
               <option value="">All Categories</option>
-              {safeCategoryList.map(cat => (   // ← uses safeCategoryList, never crashes
+              {safeCategoryList.map(cat => (
                 <option key={cat.slug} value={cat.slug}>{cat.name}</option>
               ))}
             </select>
@@ -109,17 +125,79 @@ const Header = ({
                 </span>
               </div>
 
-              {/* CART BUTTON */}
-              <div className="position-relative" style={{ cursor: "pointer" }} onClick={onCartClick}>
-                <button className="btn btn-dark px-3 py-2" style={{ borderRadius: "12px" }}>
-                  🛒 Cart
-                </button>
-                {cartCount > 0 && (
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {cartCount}
+              {/* ── CART ICON WITH DROPDOWN ── */}
+              <div className="position-relative" ref={cartRef}>
+
+                {/* Cart Icon Button */}
+                <div
+                  className="d-flex align-items-center gap-2"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setCartOpen(prev => !prev)}
+                >
+                  <div className="position-relative">
+                    <FaShoppingCart style={{ fontSize: "26px", color: "#004851" }} />
+                    {/* Badge — shows unique product count */}
+                    {cartCount > 0 && (
+                      <span
+                        className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        style={{ fontSize: "10px" }}
+                      >
+                        {cartCount}
+                      </span>
+                    )}
+                  </div>
+                  <span style={{ fontSize: "16px", color: "#004851", fontWeight: "500" }}>
+                    Cart
                   </span>
+                </div>
+
+                {/* ── CART DROPDOWN PANEL ── */}
+                {cartOpen && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "calc(100% + 16px)",
+                      right: "0",
+                      width: "360px",
+                      backgroundColor: "#fff",
+                      borderRadius: "16px",
+                      boxShadow: "0 8px 40px rgba(0,0,0,0.18)",
+                      zIndex: 9999,
+                      border: "1px solid #e8e8e8",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {/* Dropdown Header — shows unique product count */}
+                    <div
+                      className="d-flex justify-content-between align-items-center px-3 py-2"
+                      style={{ borderBottom: "1px solid #eee", backgroundColor: "#f9f9f9" }}
+                    >
+                      <span className="fw-bold" style={{ color: "#004851" }}>
+                        {/* ── FIX: "X products" not "X items" ── */}
+                        🛒 My Cart {cartCount > 0 && `(${cartCount} ${cartCount === 1 ? 'product' : 'products'})`}
+                      </span>
+                      <button
+                        className="btn btn-sm text-muted p-0"
+                        onClick={() => setCartOpen(false)}
+                        style={{ fontSize: "18px", lineHeight: 1 }}
+                      >
+                        ✕
+                      </button>
+                    </div>
+
+                    {/* Cart Component inside dropdown */}
+                    <Cart
+                      cartItems={safeCartItems}
+                      onUpdateQuantity={onUpdateQuantity}
+                      onRemoveItem={onRemoveItem}
+                      onClearCart={onClearCart}
+                    />
+
+                  </div>
                 )}
+
               </div>
+              {/* ── END CART ── */}
 
             </div>
           </div>
@@ -159,7 +237,7 @@ const Header = ({
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
