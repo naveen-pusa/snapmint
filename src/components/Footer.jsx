@@ -298,7 +298,7 @@ const Footer = () => {
 
             {/* SUPPORT LINKS */}
 
-            <div className="col-lg-3 col-md-6 mb-4">
+            <div  className="col-lg-3 col-md-6 mb-4">
 
               <h3
                 style={{
