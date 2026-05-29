@@ -1,90 +1,96 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { AnimatePresence } from 'framer-motion'
 import Header from '../components/Header'
 import Carousel from '../components/Carousel'
 import Footer from '../components/Footer'
 import Products from './Products'
 // import SingleProduct from './SingleProduct'
+import AuthModal from '../components/AuthModal'
 
 function Home() {
 
   const [page, setPage] = useState('home')
   const [selectedProduct, setSelectedProduct] = useState(null)
 
-  // Search & Category
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
   const [categoryList, setCategoryList] = useState([])
 
-  // ── CART STATE ──
-  // Initialize from localStorage so cart survives page refresh
   const [cartItems, setCartItems] = useState(() => {
     try {
       const saved = localStorage.getItem('snapmint_cart')
       return saved ? JSON.parse(saved) : []
-    } catch {
-      return []
-    }
+    } catch { return [] }
   })
 
-  // ── SAVE TO LOCALSTORAGE every time cartItems changes ──
-  // This is why cart persists on refresh
+  // ── AUTH: check if already logged in ──
+  // If logged in → user = { name, email }, app opens directly
+  // If NOT logged in → user = null, AuthModal shows and BLOCKS the app
+  const [user, setUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('snapmint_loggedIn')
+      return saved ? JSON.parse(saved) : null
+    } catch { return null }
+  })
+
+  // Save cart on change
   useEffect(() => {
     localStorage.setItem('snapmint_cart', JSON.stringify(cartItems))
   }, [cartItems])
 
-  // Fetch category list once on mount
   useEffect(() => {
     axios.get('https://dummyjson.com/products/categories').then(({ data }) => {
       setCategoryList(data)
     })
   }, [])
 
-  // ── ADD TO CART ──
-  // FIXED: uses functional update with strict id check
-  // Same product → qty+1 only. New product → add with qty:1
+  // Called when signup or login succeeds — unlocks the app
+  const handleAuthSuccess = (loggedInUser) => {
+    setUser(loggedInUser)
+  }
+
+  const handleLogout = () => {
+    setUser(null)
+    localStorage.removeItem('snapmint_loggedIn')
+  }
+
   const handleAddToCart = (product) => {
     setCartItems(prev => {
-      // Check if this exact product id already exists
       const existingIndex = prev.findIndex(item => item.id === product.id)
-
       if (existingIndex !== -1) {
-        // Product already in cart → only increase quantity, do NOT add new item
         const updated = [...prev]
-        updated[existingIndex] = {
-          ...updated[existingIndex],
-          qty: updated[existingIndex].qty + 1
-        }
+        updated[existingIndex] = { ...updated[existingIndex], qty: updated[existingIndex].qty + 1 }
         return updated
       }
-
-      // Product not in cart → add as new item with qty: 1
       return [...prev, { ...product, qty: 1 }]
     })
   }
 
-  // ── UPDATE QUANTITY ──
   const handleUpdateQuantity = (id, newQty) => {
-    if (newQty < 1) {
-      handleRemoveItem(id)
-      return
-    }
-    setCartItems(prev =>
-      prev.map(item => item.id === id ? { ...item, qty: newQty } : item)
-    )
+    if (newQty < 1) { handleRemoveItem(id); return }
+    setCartItems(prev => prev.map(item => item.id === id ? { ...item, qty: newQty } : item))
   }
 
-  // ── REMOVE SINGLE ITEM ──
   const handleRemoveItem = (id) => {
     setCartItems(prev => prev.filter(item => item.id !== id))
   }
 
-  // ── CLEAR ALL — also clears localStorage ──
   const handleClearCart = () => {
     setCartItems([])
     localStorage.removeItem('snapmint_cart')
   }
 
+  // ── KEY LOGIC ──
+  // If user is null (not logged in) → show ONLY the AuthModal, nothing else renders
+  // If user exists → show the full app
+  if (!user) {
+    return (
+      <AuthModal onAuthSuccess={handleAuthSuccess} />
+    )
+  }
+
+  // ── FULL APP — only renders after login/signup ──
   return (
     <>
       <Header
@@ -97,11 +103,10 @@ function Home() {
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
         onClearCart={handleClearCart}
-        onLogoClick={() => {
-          setPage('home')
-          setSearch('')
-          setCategory('')
-        }}
+        user={user}
+        onSignupClick={() => {}}
+        onLogout={handleLogout}
+        onLogoClick={() => { setPage('home'); setSearch(''); setCategory('') }}
       />
 
       {page === 'home' && (
@@ -110,10 +115,7 @@ function Home() {
           <Products
             search={search}
             category={category}
-            onSelectProduct={(product) => {
-              setSelectedProduct(product)
-              setPage('single')
-            }}
+            onSelectProduct={(product) => { setSelectedProduct(product); setPage('single') }}
             onAddToCart={handleAddToCart}
           />
         </>
