@@ -6,7 +6,7 @@ const Footer = () => {
 
   // COMMON STYLE
  
-  const linkStyle = (name) => ({
+  const linkStyle  = (name) => ({
   color: hovered === name ? "#2e8ca1" : "#3f4f5f",
     cursor: "pointer",
     transition: "0.3s",
