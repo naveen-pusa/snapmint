@@ -11,17 +11,17 @@ return (
   </div>
   <div className="carousel-inner">
     <div className="carousel-item active">
-      <img src="https://elev8vp.com/wp-content/uploads/2025/07/snapmint-logo.webp"className="d-block w-100" style={{ height: "300px", objectFit: "cover" }}alt="Slide 1"/>
+      <img src="https://static.vecteezy.com/system/resources/previews/008/601/839/non_2x/online-shopping-background-design-free-vector.jpg"className="d-block w-100" style={{ height: "500px", objectFit: "" }}alt="Slide 1"/>
       <div className="carousel-caption d-none d-md-block">
       </div>
     </div>
     <div className="carousel-item">
-<img src="https://cdn.aptoide.com/imgs/4/4/d/44dc60773f098a3c0c18442750b36deb_fgraphic.png" className="d-block w-100"style={{ height: "300px", objectFit: "cover" }} alt="Slide 1"/>
+<img src="https://images.picxy.com/cache/2020/6/20/6c1397739fa678f0a59615cff755d264.jpg" className="d-block w-100"style={{ height: "500px", objectFit: "" }} alt="Slide 1"/>
       <div className="carousel-caption d-none d-md-block">
       </div>
     </div>
     <div className="carousel-item">   
-      <img src="https://www.merisisvp.com/hs-fs/hubfs/Untitled%20design%20(1).png?width=2000&height=1125&name=Untitled%20design%20(1).png" className="d-block w-100"  style={{ height: "300px", objectFit: "cover" }}alt="Slide 1"/>
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/010/930/996/small/shopping-online-on-phone-with-podium-paper-art-modern-background-gifts-box-vector.jpg" className="d-block w-100"  style={{ height: "500px", objectFit: "" }}alt="Slide 1"/>
       <div className="carousel-caption d-none d-md-block">
        
       </div>
