@@ -11,7 +11,7 @@ function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart }) {
         /* ── EMPTY STATE ── */
         <div className="text-center py-4 px-3">
           <div style={{ fontSize: '48px' }}>🛒</div>
-          <h6 className="fw-bold mt-2">Your cart is empty</h6>
+          <h6  className="fw-bold mt-2">Your cart is empty</h6>
           <p className="text-muted small">Add some products!</p>
         </div>
 
