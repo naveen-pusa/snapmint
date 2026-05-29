@@ -101,13 +101,13 @@ function Products({ onSelectProduct, onAddToCart, search, category }) {
         animate="show"
         key={`${search}-${category}`}  // re-animates on search/category change
       >
-        {product.length} Products
+        {/* {product.length} Products
         {search ? ` for "${search}"` : category ? ` in "${category}"` : ''}
         {totalPages > 1 && (
           <span className="text-muted fw-normal fs-6 ms-2">
             — Page {currentPage} of {totalPages}
           </span>
-        )}
+        )} */}
       </motion.h5>
 
       {/* Product Cards Grid with stagger animation */}
