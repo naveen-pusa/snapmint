@@ -236,7 +236,7 @@ function AuthModal({ onAuthSuccess }) {
               </motion.button>
               <p className="text-center text-muted small mt-3 mb-0">
                 Don't have an account?{' '}
-                <span style={{ color: '#004851', cursor: 'pointer', fontWeight: '700' }}
+                <span  style={{ color: '#004851', cursor: 'pointer', fontWeight: '700' }}
                   onClick={() => { setTab('signup'); setError(''); setSuccess('') }}>
                   Sign up here
                 </span>
