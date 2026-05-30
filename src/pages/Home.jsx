@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import Carousel from '../components/Carousel'
 import Footer from '../components/Footer'
 import Products from './Products'
-// import SingleProduct from './SingleProduct'
-import AuthModal from '../components/AuthModal'
 
 function Home() {
 
-  const [page, setPage] = useState('home')
-  const [selectedProduct, setSelectedProduct] = useState(null)
+  const navigate = useNavigate()
 
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
@@ -24,17 +21,13 @@ function Home() {
     } catch { return [] }
   })
 
-  // ── AUTH: check if already logged in ──
-  // If logged in → user = { name, email }, app opens directly
-  // If NOT logged in → user = null, AuthModal shows and BLOCKS the app
-  const [user, setUser] = useState(() => {
+  const [user] = useState(() => {
     try {
       const saved = localStorage.getItem('snapmint_loggedIn')
       return saved ? JSON.parse(saved) : null
     } catch { return null }
   })
 
-  // Save cart on change
   useEffect(() => {
     localStorage.setItem('snapmint_cart', JSON.stringify(cartItems))
   }, [cartItems])
@@ -45,14 +38,9 @@ function Home() {
     })
   }, [])
 
-  // Called when signup or login succeeds — unlocks the app
-  const handleAuthSuccess = (loggedInUser) => {
-    setUser(loggedInUser)
-  }
-
   const handleLogout = () => {
-    setUser(null)
     localStorage.removeItem('snapmint_loggedIn')
+    navigate('/auth', { replace: true })
   }
 
   const handleAddToCart = (product) => {
@@ -81,16 +69,6 @@ function Home() {
     localStorage.removeItem('snapmint_cart')
   }
 
-  // ── KEY LOGIC ──
-  // If user is null (not logged in) → show ONLY the AuthModal, nothing else renders
-  // If user exists → show the full app
-  if (!user) {
-    return (
-      <AuthModal onAuthSuccess={handleAuthSuccess} />
-    )
-  }
-
-  // ── FULL APP — only renders after login/signup ──
   return (
     <>
       <Header
@@ -104,30 +82,19 @@ function Home() {
         onRemoveItem={handleRemoveItem}
         onClearCart={handleClearCart}
         user={user}
-        onSignupClick={() => {}}
+        onSignupClick={() => navigate('/auth')}
         onLogout={handleLogout}
-        onLogoClick={() => { setPage('home'); setSearch(''); setCategory('') }}
+        onLogoClick={() => { setSearch(''); setCategory(''); navigate('/') }}
       />
 
-      {page === 'home' && (
-        <>
-          {!search && !category && <Carousel />}
-          <Products
-            search={search}
-            category={category}
-            onSelectProduct={(product) => { setSelectedProduct(product); setPage('single') }}
-            onAddToCart={handleAddToCart}
-          />
-        </>
-      )}
+      {!search && !category && <Carousel />}
 
-      {page === 'single' && selectedProduct && (
-        <SingleProduct
-          product={selectedProduct}
-          onAddToCart={handleAddToCart}
-          onBack={() => setPage('home')}
-        />
-      )}
+      <Products
+        search={search}
+        category={category}
+        onSelectProduct={(product) => navigate(`/product/${product.id}`, { state: { product } })}
+        onAddToCart={handleAddToCart}
+      />
 
       <Footer />
     </>
