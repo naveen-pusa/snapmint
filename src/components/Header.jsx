@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaSearch, FaRegUserCircle, FaBars, FaShoppingCart, FaSignOutAlt } from "react-icons/fa";
 import { HiOutlineBriefcase } from "react-icons/hi";
 import { PiCubeLight } from "react-icons/pi";
-import Cart from "../pages/Cart";
+import Cart from "./Cart";   // ← FIXED: was "../Cart" which is wrong path
 
 const Header = ({
   search,
@@ -15,9 +15,9 @@ const Header = ({
   onRemoveItem,
   onClearCart,
   onLogoClick,
-  user,           // logged in user object { name, email }
-  onSignupClick,  // opens AuthModal
-  onLogout,       // logs out
+  user,
+  onSignupClick,
+  onLogout,
 }) => {
 
   const safeCartItems = cartItems || []
@@ -28,7 +28,6 @@ const Header = ({
 
   const cartCount = safeCartItems.length
 
-  // Close cart dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(e) {
       if (cartRef.current && !cartRef.current.contains(e.target)) {
@@ -41,17 +40,14 @@ const Header = ({
 
   return (
     <>
-      {/* ── TOP HEADER ── */}
-      <div
-        className="container-fluid"
-        style={{ backgroundColor: "#eef8fa", padding: "15px 30px" }}
-      >
+      {/* TOP HEADER */}
+      <div className="container-fluid" style={{ backgroundColor: "#eef8fa", padding: "15px 30px" }}>
         <div className="row align-items-center g-3">
 
           {/* LOGO */}
           <div className="col-lg-2" style={{ cursor: "pointer" }} onClick={onLogoClick}>
             <h1 style={{ fontSize: "42px", fontWeight: "700", color: "#004851", margin: "0" }}>
-              PUSA<span style={{ color: "#63c7cf", fontWeight: "500" }}>VKR</span>
+              snap<span style={{ color: "#63c7cf", fontWeight: "500" }}>mint</span>
             </h1>
           </div>
 
@@ -85,62 +81,47 @@ const Header = ({
             </select>
           </div>
 
-          {/* RIGHT SIDE ICONS */}
+          {/* RIGHT ICONS */}
           <div className="col-lg-4">
             <div className="d-flex justify-content-end align-items-center gap-4">
 
-              {/* FOR BUSINESS */}
               <div className="d-flex align-items-center gap-2">
                 <HiOutlineBriefcase style={{ fontSize: "24px", color: "#63c7cf" }} />
                 <span style={{ fontSize: "16px", color: "#004851", fontWeight: "500" }}>For Business</span>
               </div>
 
-              {/* PAY EMI */}
               <div className="d-flex align-items-center gap-2">
                 <PiCubeLight style={{ fontSize: "24px", color: "#63c7cf" }} />
                 <span style={{ fontSize: "16px", color: "#004851", fontWeight: "500" }}>Pay EMI</span>
               </div>
 
-              {/* ── SIGN UP / USER INFO ── */}
+              {/* USER / SIGN UP */}
               {user ? (
-                // Logged in — show name + logout
                 <div className="d-flex align-items-center gap-2">
                   <FaRegUserCircle style={{ fontSize: "24px", color: "#63c7cf" }} />
                   <span style={{ fontSize: "15px", color: "#004851", fontWeight: "600" }}>
                     Hi, {user.name.split(' ')[0]}
                   </span>
-                  <FaSignOutAlt
-                    title="Logout"
+                  <FaSignOutAlt title="Logout"
                     style={{ fontSize: "18px", color: "#e74c3c", cursor: "pointer" }}
-                    onClick={onLogout}
-                  />
+                    onClick={onLogout} />
                 </div>
               ) : (
-                // Not logged in — show Sign-up button
-                <div
-                  className="d-flex align-items-center gap-2"
-                  style={{ cursor: "pointer" }}
-                  onClick={onSignupClick}
-                >
+                <div className="d-flex align-items-center gap-2" style={{ cursor: "pointer" }} onClick={onSignupClick}>
                   <FaRegUserCircle style={{ fontSize: "24px", color: "#63c7cf" }} />
                   <span style={{ fontSize: "16px", color: "#004851", fontWeight: "500" }}>Sign-up</span>
                 </div>
               )}
 
-              {/* ── CART ICON WITH DROPDOWN ── */}
+              {/* CART */}
               <div className="position-relative" ref={cartRef}>
-                <div
-                  className="d-flex align-items-center gap-2"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => setCartOpen(prev => !prev)}
-                >
+                <div className="d-flex align-items-center gap-2" style={{ cursor: "pointer" }}
+                  onClick={() => setCartOpen(prev => !prev)}>
                   <div className="position-relative">
                     <FaShoppingCart style={{ fontSize: "26px", color: "#004851" }} />
                     {cartCount > 0 && (
-                      <span
-                        className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                        style={{ fontSize: "10px" }}
-                      >
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        style={{ fontSize: "10px" }}>
                         {cartCount}
                       </span>
                     )}
@@ -148,28 +129,21 @@ const Header = ({
                   <span style={{ fontSize: "16px", color: "#004851", fontWeight: "500" }}>Cart</span>
                 </div>
 
-                {/* CART DROPDOWN */}
                 {cartOpen && (
-                  <div
-                    style={{
-                      position: "absolute", top: "calc(100% + 16px)", right: "0",
-                      width: "360px", backgroundColor: "#fff", borderRadius: "16px",
-                      boxShadow: "0 8px 40px rgba(0,0,0,0.18)", zIndex: 9999,
-                      border: "1px solid #e8e8e8", overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      className="d-flex justify-content-between align-items-center px-3 py-2"
-                      style={{ borderBottom: "1px solid #eee", backgroundColor: "#f9f9f9" }}
-                    >
+                  <div style={{
+                    position: "absolute", top: "calc(100% + 16px)", right: "0",
+                    width: "360px", backgroundColor: "#fff", borderRadius: "16px",
+                    boxShadow: "0 8px 40px rgba(0,0,0,0.18)", zIndex: 9999,
+                    border: "1px solid #e8e8e8", overflow: "hidden",
+                  }}>
+                    <div className="d-flex justify-content-between align-items-center px-3 py-2"
+                      style={{ borderBottom: "1px solid #eee", backgroundColor: "#f9f9f9" }}>
                       <span className="fw-bold" style={{ color: "#004851" }}>
                         🛒 My Cart {cartCount > 0 && `(${cartCount} ${cartCount === 1 ? 'product' : 'products'})`}
                       </span>
-                      <button
-                        className="btn btn-sm text-muted p-0"
+                      <button className="btn btn-sm text-muted p-0"
                         onClick={() => setCartOpen(false)}
-                        style={{ fontSize: "18px", lineHeight: 1 }}
-                      >✕</button>
+                        style={{ fontSize: "18px", lineHeight: 1 }}>✕</button>
                     </div>
                     <Cart
                       cartItems={safeCartItems}
@@ -186,24 +160,20 @@ const Header = ({
         </div>
       </div>
 
-      {/* ── BOTTOM NAVBAR ── */}
-      <div
-        className="container-fluid"
-        style={{ borderBottom: "1px solid #ddd", padding: "12px 30px", backgroundColor: "white" }}
-      >
+      {/* BOTTOM NAVBAR */}
+      <div className="container-fluid"
+        style={{ borderBottom: "1px solid #ddd", padding: "12px 30px", backgroundColor: "white" }}>
         <div className="d-flex align-items-center gap-5 flex-wrap">
           <FaBars style={{ fontSize: "26px", cursor: "pointer", color: "#004851" }} />
           {["beauty", "groceries", "mens-shirts", "smartphones", "womens-jewellery", "fragrances", "skin-care", "sports-accessories"].map(cat => (
-            <span
-              key={cat}
+            <span key={cat}
               style={{
                 fontWeight: "500", cursor: "pointer",
                 color: category === cat ? "#2e8ca1" : "#1a1a1a",
                 borderBottom: category === cat ? "2px solid #2e8ca1" : "none",
                 paddingBottom: "2px", textTransform: "capitalize",
               }}
-              onClick={() => { setCategory(cat); setSearch('') }}
-            >
+              onClick={() => { setCategory(cat); setSearch('') }}>
               {cat.replace(/-/g, ' ')}
             </span>
           ))}
