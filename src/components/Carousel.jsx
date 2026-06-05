@@ -9,7 +9,7 @@ return (
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
-  <div className="carousel-inner">
+  <div  className="carousel-inner">
     <div className="carousel-item active">
       <img src="https://static.vecteezy.com/system/resources/previews/008/601/839/non_2x/online-shopping-background-design-free-vector.jpg"className="d-block w-100" style={{ height: "500px", objectFit: "" }}alt="Slide 1"/>
       <div className="carousel-caption d-none d-md-block">
