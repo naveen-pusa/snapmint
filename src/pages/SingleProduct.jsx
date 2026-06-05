@@ -26,7 +26,7 @@ function SingleProduct() {
     }
   }, [id])
 
-  const handleAddToCart = () => {
+  const  handleAddToCart = () => {
     const cartItems = JSON.parse(localStorage.getItem('snapmint_cart') || '[]')
     const existingIndex = cartItems.findIndex(item => item.id === product.id)
     if (existingIndex !== -1) {
