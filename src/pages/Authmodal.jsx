@@ -59,7 +59,7 @@ function Authmodal() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
         style={{
-          backgroundColor: '#fff', borderRadius: '24px', width: '100%',
+           backgroundColor: '#fff', borderRadius: '24px', width: '100%',
           maxWidth: '440px', boxShadow: '0 30px 80px rgba(0,0,0,0.4)', overflow: 'hidden',
         }}
       >
