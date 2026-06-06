@@ -90,7 +90,7 @@ function Home() {
       {!search && !category && <Carousel />}
 
       <Products
-         search={search}
+       search={search}
         category={category}
         onSelectProduct={(product) => navigate(`/product/${product.id}`, { state: { product } })}
         onAddToCart={handleAddToCart}
