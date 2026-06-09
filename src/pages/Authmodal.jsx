@@ -50,7 +50,7 @@ function Authmodal() {
 
   return (
     <div style={{
-       minHeight: '100vh', backgroundColor: '#004851',
+     minHeight: '100vh', backgroundColor: '#004851',
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px',
       backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(99,199,207,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(168,224,99,0.1) 0%, transparent 40%)',
     }}>
