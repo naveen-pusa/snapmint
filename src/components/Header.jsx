@@ -41,7 +41,7 @@ const Header = ({
   return (
     <>
       {/* TOP HEADER */}
-      <div  className="container-fluid" style={{ backgroundColor: "#eef8fa", padding: "15px 30px" }}>
+      <div className="container-fluid" style={{ backgroundColor: "#eef8fa", padding: "15px 30px" }}>
         <div className="row align-items-center g-3">
 
           {/* LOGO */}
