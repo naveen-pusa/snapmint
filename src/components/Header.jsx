@@ -42,7 +42,7 @@ const Header = ({
     <>
       {/* TOP HEADER */}
       <div className="container-fluid" style={{ backgroundColor: "#eef8fa", padding: "15px 30px" }}>
-        <div className="row align-items-center g-3">
+      <div className="row align-items-center g-3">
 
           {/* LOGO */}
           <div className="col-lg-2" style={{ cursor: "pointer" }} onClick={onLogoClick}>
