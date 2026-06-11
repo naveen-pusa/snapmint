@@ -47,7 +47,7 @@ const Header = ({
           {/* LOGO */}
           <div className="col-lg-2" style={{ cursor: "pointer" }} onClick={onLogoClick}>
             <h1 style={{ fontSize: "42px", fontWeight: "700", color: "#004851", margin: "0" }}>
-              Pusa<span style={{ color: "#63c7cf", fontWeight: "500" }}>KVR</span>
+             Pusa<span style={{ color: "#63c7cf", fontWeight: "500" }}>KVR</span>
             </h1>
           </div>
 
