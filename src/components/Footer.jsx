@@ -33,8 +33,8 @@ const Footer = () => {
 
           <div className="col-lg-3 col-md-6 mb-4">
 
-            <h3
-               style={{
+          <h3
+              style={{
                 fontSize: "18px",
                 fontWeight: "700",
                 color: "#3f4f5f",
