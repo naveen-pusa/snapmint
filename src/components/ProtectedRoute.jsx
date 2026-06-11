@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom'
 function ProtectedRoute({ children }) {
   const user = (() => {
   try {
-      const saved = localStorage.getItem('snapmint_loggedIn')
+    const saved = localStorage.getItem('snapmint_loggedIn')
       return saved ? JSON.parse(saved) : null
     } catch { return null }
   })()
