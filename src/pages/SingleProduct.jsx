@@ -28,8 +28,8 @@ function SingleProduct() {
 
   const handleAddToCart = () => {
    const cartItems = JSON.parse(localStorage.getItem('snapmint_cart') || '[]')
-    const existingIndex = cartItems.findIndex(item => item.id === product.id)
-    if  (existingIndex !== -1) {
+   const existingIndex = cartItems.findIndex(item => item.id === product.id)
+    if (existingIndex !== -1) {
         for (let i = 0; i < quantity; i++) {
         cartItems[existingIndex].qty += 1
       }
