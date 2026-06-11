@@ -112,7 +112,7 @@ function Products({ onSelectProduct, onAddToCart, search, category }) {
 
       {/* Product Cards Grid with stagger animation */}
       <AnimatePresence mode="wait">
-        <motion.div
+      <motion.div
           className="row"
           key={`${search}-${category}-${currentPage}`}  // re-triggers animation on any change
           variants={containerVariants}
