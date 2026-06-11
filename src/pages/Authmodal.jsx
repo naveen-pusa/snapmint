@@ -54,7 +54,7 @@ function Authmodal() {
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px',
       backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(99,199,207,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(168,224,99,0.1) 0%, transparent 40%)',
     }}>
-      <motion.div
+    <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
