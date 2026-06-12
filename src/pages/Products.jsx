@@ -108,7 +108,7 @@ function Products({ onSelectProduct, onAddToCart, search, category }) {
             — Page {currentPage} of {totalPages}
           </span>
         )} */}
-      </motion.h5>
+       </motion.h5>
 
       {/* Product Cards Grid with stagger animation */}
       <AnimatePresence mode="wait">
