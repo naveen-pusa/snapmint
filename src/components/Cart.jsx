@@ -6,7 +6,7 @@ function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart }) {
 
   return (
     <>
-      {cartItems.length === 0 ? (
+       {cartItems.length === 0 ? (
 
         /* ── EMPTY STATE ── */
         <div className="text-center py-4 px-3">
