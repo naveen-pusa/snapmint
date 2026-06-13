@@ -121,7 +121,7 @@ function Products({ onSelectProduct, onAddToCart, search, category }) {
           exit={{ opacity: 0, transition: { duration: 0.15 } }}
         >
           {currentProducts.length === 0 ? (
-            <motion.div
+          <motion.div
               className="col-12 text-center py-5 text-muted"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
