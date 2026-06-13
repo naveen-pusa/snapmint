@@ -31,7 +31,7 @@ function SingleProduct() {
    const existingIndex = cartItems.findIndex(item => item.id === product.id)
     if (existingIndex !== -1) {
         for (let i = 0; i < quantity; i++) {
-        cartItems[existingIndex].qty += 1
+      cartItems[existingIndex].qty += 1
       }
     } else {
       cartItems.push({ ...product, qty: quantity })
