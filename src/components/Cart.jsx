@@ -9,7 +9,7 @@ function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart }) {
       {cartItems.length === 0 ? (
 
         /* ── EMPTY STATE ── */
-        <div className="text-center py-4 px-3">
+         <div className="text-center py-4 px-3">
           <div style={{ fontSize: '48px' }}>🛒</div>
           <h6  className="fw-bold mt-2">Your cart is empty</h6>
           <p className="text-muted small">Add some products!</p>
