@@ -8,7 +8,7 @@ import Products from './Products'
 
 function Home() {
 
-  const navigate = useNavigate()
+   const navigate = useNavigate()
 
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
