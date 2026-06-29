@@ -29,7 +29,7 @@ const Footer = () => {
 
         <div className="row">
 
-          {/* COLUMN 1 */}
+        {/* COLUMN 1 */}
 
           <div className="col-lg-3 col-md-6 mb-4">
 
